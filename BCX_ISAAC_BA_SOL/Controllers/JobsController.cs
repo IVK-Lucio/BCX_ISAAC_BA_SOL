@@ -50,6 +50,9 @@ namespace BCX_ISAAC_BA_SOL.Controllers
         {
             if (ModelState.IsValid)
             {
+                job.Id = Guid.NewGuid().ToString();
+                job.UserName = User.Identity.ToString();
+                job.ActiveStatus = true;
                 db.Jobs.Add(job);
                 db.SaveChanges();
                 return RedirectToAction("Index");

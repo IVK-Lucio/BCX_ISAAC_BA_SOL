@@ -4,11 +4,9 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Post a Job |  @Html.ActionLink("Create New Job", "Create")</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+
 <table class="table">
     <tr>
         <th>
@@ -32,9 +30,9 @@
         <th>
             @Html.DisplayNameFor(model => model.CompanyWebsite)
         </th>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.UserName)
-        </th>
+        </th>*@
         <th>
             @Html.DisplayNameFor(model => model.ActiveStatus)
         </th>
@@ -64,9 +62,9 @@
         <td>
             @Html.DisplayFor(modelItem => item.CompanyWebsite)
         </td>
-        <td>
+        @*<td>
             @Html.DisplayFor(modelItem => item.UserName)
-        </td>
+        </td>*@
         <td>
             @Html.DisplayFor(modelItem => item.ActiveStatus)
         </td>
