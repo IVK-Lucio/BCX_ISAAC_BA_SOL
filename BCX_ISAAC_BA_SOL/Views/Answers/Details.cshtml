@@ -1,0 +1,42 @@
+﻿@model BCX_ISAAC_BA_SOL.Models.Answer
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Answer</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.JobApplication.JobId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.JobApplication.JobId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Question.JobId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Question.JobId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AText)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AText)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

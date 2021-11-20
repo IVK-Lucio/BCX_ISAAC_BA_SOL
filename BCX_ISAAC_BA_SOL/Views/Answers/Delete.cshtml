@@ -1,0 +1,48 @@
+﻿@model BCX_ISAAC_BA_SOL.Models.Answer
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Answer</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.JobApplication.JobId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.JobApplication.JobId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Question.JobId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Question.JobId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AText)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AText)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>
