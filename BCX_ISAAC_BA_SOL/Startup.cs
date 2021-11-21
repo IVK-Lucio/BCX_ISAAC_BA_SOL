@@ -38,7 +38,7 @@ namespace BCX_ISAAC_BA_SOL
                 user.Othernames = "Isaac Vertino";
                 user.UserName = "isaac@bcx.com";
                 user.Email = "isaac@bcx.com";
-                user.PhoneNumber = "08039611996";
+                user.PhoneNumber = "264816303555";
 
                 string userPWD = "vertino";
 
