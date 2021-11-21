@@ -10,6 +10,7 @@ using BCX_ISAAC_BA_SOL.Models;
 
 namespace BCX_ISAAC_BA_SOL.Controllers
 {
+    [Authorize(Roles = "Admin,SuperAdmin")]
     public class JobsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -53,6 +54,7 @@ namespace BCX_ISAAC_BA_SOL.Controllers
                 job.Id = Guid.NewGuid().ToString();
                 job.UserName = User.Identity.ToString();
                 job.ActiveStatus = true;
+                job.DatePosted = DateTime.Now;
                 db.Jobs.Add(job);
                 db.SaveChanges();
                 return RedirectToAction("Index");

@@ -13,10 +13,13 @@ namespace BCX_ISAAC_BA_SOL.Models
         [StringLength(128)]
         public string QuestionId { get; set; }
 
+
+        [Display(Name = "Answer Text")]
         public string AText { get; set; }
 
         [StringLength(128)]
         public string JobApplicationId { get; set; }
+
 
         public virtual JobApplication JobApplication { get; set; }
 

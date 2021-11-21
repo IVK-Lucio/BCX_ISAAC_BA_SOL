@@ -2,35 +2,40 @@
 
 @{
     ViewBag.Title = "Index";
-    
+
 }
 
 <h4>Post a Job |  @Html.ActionLink("Create New Job", "Create")</h4>
 
 
 
-    <div class="row">
-        @foreach (var item in Model)
-        {
+<div class="row">
+    @foreach (var item in Model)
+    {
 
         <div class="col-sm-6 col-md-3">
-            
-            <a href="/Jobs/Details/@item.Id" style="text-decoration:none; color:black">
-                <div class="thumbnail" style="background-color:#cfc8a1 ;border:5px solid;border-color:#140635;padding:5px 5px 10px 5px;border-radius:15px 15px;margin:4px 7px 2px 4px">
+
+            <a href="/Jobs/Details/@item.Id" style="text-decoration:none;color:black;">
+                <div class="thumbnail" style="background-color:#cfc8a1;border:5px solid;border-color:#140635;padding:5px 5px 10px 5px;border-radius:15px 15px;margin:4px 7px 2px 4px;height:300px;">
                     <h2>@Html.DisplayFor(modelItem => item.Position)</h2>
                     <p> @Html.DisplayFor(modelItem => item.Designation) |  @Html.DisplayFor(modelItem => item.EngagementType)</p>
                     <h4><span class="glyphicon glyphicon-certificate logo-small" style="color:red"></span>@Html.DisplayFor(modelItem => item.CompanyName)</h4>
                     <p><span class="glyphicon glyphicon-map-marker logo-small" style="color:red"></span>@Html.DisplayFor(modelItem => item.Location)</p>
-                    <p>@Html.DisplayFor(modelItem => item.Description)</p>
+                    <p>@ShortenText(item.Description)...</p>
 
 
-                    <a href="/Questions/Create/@item.Id">Create Questions</a>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                    <div class="pull-right">@Html.DisplayFor(modelItem=>item.DatePosted)</div>
                 </div>
             </a>
-         </div>
-            }
         </div>
+    }
+</div>
 
+@functions{
+    public string ShortenText(string txt)
+    {
+
+        return txt.Substring(0,70);
+    }
+
+   }

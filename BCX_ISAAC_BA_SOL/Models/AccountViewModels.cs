@@ -65,6 +65,18 @@ namespace BCX_ISAAC_BA_SOL.Models
     public class RegisterViewModel
     {
         [Required]
+        [Display(Name = "Surname")]
+        public string Surname { get; set; }
+
+        [Required]
+        [Display(Name = "Other Names")]
+        public string Othernames { get; set; }
+
+        [Required]
+        [Display(Name = "Phone Number")]
+        public string PhoneNumber { get; set; }
+
+        [Required]
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
