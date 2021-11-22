@@ -37,9 +37,12 @@ namespace BCX_ISAAC_BA_SOL.Controllers
         }
 
         // GET: Questions/Create
-        public ActionResult Create()
+        public ActionResult Create(string Id)
         {
-            ViewBag.JobId = new SelectList(db.Jobs, "Id", "Position");
+            //ViewBag.JobId = new SelectList(db.Jobs, "Id", "Position");
+            ViewBag.JobId = Id;
+            string position = db.Jobs.Where(j => j.Id == Id).Select(j => j.Position).FirstOrDefault();
+            ViewBag.Position = position;
             return View();
         }
 
@@ -52,12 +55,16 @@ namespace BCX_ISAAC_BA_SOL.Controllers
         {
             if (ModelState.IsValid)
             {
+                question.Id = Guid.NewGuid().ToString();
+                int count = db.Questions.Where(q => q.JobId == question.JobId).Count();
+                question.Rank = count + 1;
                 db.Questions.Add(question);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                string add = "/Jobs/Details/" + question.JobId;
+                return Redirect(add);
             }
 
-            ViewBag.JobId = new SelectList(db.Jobs, "Id", "Position", question.JobId);
+            ViewBag.JobId = question.JobId;
             return View(question);
         }
 
@@ -69,11 +76,13 @@ namespace BCX_ISAAC_BA_SOL.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Question question = db.Questions.Find(id);
+            
             if (question == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.JobId = new SelectList(db.Jobs, "Id", "Position", question.JobId);
+            ViewBag.JobId =  question.JobId;
+            
             return View(question);
         }
 
@@ -88,9 +97,10 @@ namespace BCX_ISAAC_BA_SOL.Controllers
             {
                 db.Entry(question).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                string add = "/Jobs/Details/" + question.JobId;
+                return Redirect(add);
             }
-            ViewBag.JobId = new SelectList(db.Jobs, "Id", "Position", question.JobId);
+            ViewBag.JobId = question.JobId;
             return View(question);
         }
 
@@ -115,9 +125,11 @@ namespace BCX_ISAAC_BA_SOL.Controllers
         public ActionResult DeleteConfirmed(string id)
         {
             Question question = db.Questions.Find(id);
+            string ji = question.JobId;
             db.Questions.Remove(question);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            string add = "/Jobs/Details/" + ji;
+            return Redirect(add);
         }
 
         protected override void Dispose(bool disposing)

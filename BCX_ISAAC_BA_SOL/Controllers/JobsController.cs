@@ -83,7 +83,7 @@ namespace BCX_ISAAC_BA_SOL.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Position,Description,CompanyName,Location,Designation,EngagementType,CompanyWebsite,UserName,ActiveStatus")] Job job)
+        public ActionResult Edit([Bind(Include = "Id,Position,Description,CompanyName,Location,Designation,EngagementType,CompanyWebsite,UserName,ActiveStatus,DatePosted")] Job job)
         {
             if (ModelState.IsValid)
             {

@@ -20,6 +20,7 @@ namespace BCX_ISAAC_BA_SOL.Models
         [StringLength(128)]
         public string JobId { get; set; }
 
+        [Display(Name = "Question")]
         public string QText { get; set; }
 
         public int? Rank { get; set; }
