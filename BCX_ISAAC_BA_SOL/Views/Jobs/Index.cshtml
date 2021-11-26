@@ -1,13 +1,24 @@
-﻿@model IEnumerable<BCX_ISAAC_BA_SOL.Models.Job>
+﻿@*@model IEnumerable<BCX_ISAAC_BA_SOL.Models.Job>*@
+@model PagedList.IPagedList<BCX_ISAAC_BA_SOL.Models.Job>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
 @{
     ViewBag.Title = "Index";
 
 }
 
-<h4>Job Posts |  @Html.ActionLink("Post New Job", "Create")</h4>
+<h4>Job Posts |  @Html.ActionLink("Post New Job", "Create") 
+    <span class="pull-right">
+    <form class="navbar-form navbar-right" role="search" action="/Jobs/" method="Get">
+    <div class="form-group">
+        <input name="SearchString" id="SearchString" class="form-control" placeholder="Search" type="text" style="width:250px;">
+    </div>
+    <button type="submit" class="form-control">Search</button>
+    </form>
+        </span></h4>
 
-
+<br />
 
 <div class="row">
     @foreach (var item in Model)
@@ -16,7 +27,7 @@
         <div class="col-sm-6 col-md-3">
 
             <a href="/Jobs/Details/@item.Id" style="text-decoration:none;color:black;">
-                <div class="thumbnail" style="background-color:#e1e2b8;border:5px solid;border-color:#140635;padding:5px 5px 10px 5px;border-radius:15px 15px;margin:4px 7px 2px 4px;height:350px;">
+                <div class="thumbnail" style="background-color:#e5e5e5;border:5px solid;border-color:#140635;padding:5px 5px 10px 5px;border-radius:15px 15px;margin:4px 7px 2px 4px;height:350px;">
                     <h2>@Html.DisplayFor(modelItem => item.Position)</h2>
                     <p> @Html.DisplayFor(modelItem => item.Designation) |  @Html.DisplayFor(modelItem => item.EngagementType)</p>
                     <h4><span class="glyphicon glyphicon-certificate logo-small" style="color:red"></span>@Html.DisplayFor(modelItem => item.CompanyName)</h4>
@@ -24,18 +35,23 @@
                     <p>@ShortenText(item.Description)...</p>
 
 
-                    <div class="pull-right">@Html.DisplayFor(modelItem=>item.DatePosted)</div>
+                    <div class="pull-right">@Html.DisplayFor(modelItem => item.DatePosted)</div>
                 </div>
             </a>
         </div>
     }
 </div>
+<div>
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
 
+    @Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+</div>
 @functions{
     public string ShortenText(string txt)
     {
 
-        return txt.Substring(0,70);
+        return txt.Substring(0, 70);
     }
 
-   }
+}

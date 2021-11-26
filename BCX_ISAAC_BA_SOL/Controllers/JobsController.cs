@@ -5,6 +5,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
+using PagedList;
 using System.Web.Mvc;
 using BCX_ISAAC_BA_SOL.Models;
 
@@ -16,9 +17,50 @@ namespace BCX_ISAAC_BA_SOL.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Jobs
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
-            return View(db.Jobs.ToList());
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewBag.DateSortParm = sortOrder == "Job_name" ? "Job_desc" : "job_name";
+
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
+
+
+            var jobs = from s in db.Jobs
+                           select s;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                jobs = jobs.Where(s => s.Position.Contains(searchString)
+                                       || s.Description.Contains(searchString));
+            }
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    jobs = jobs.OrderByDescending(s => s.Position);
+                    break;
+                case "job_name":
+                    jobs = jobs.OrderBy(s => s.Position);
+                    break;
+
+                default:  // Name ascending 
+                    jobs = jobs.OrderBy(s => s.Position);
+                    break;
+            }
+            ViewBag.JobsCount = jobs.Count();
+            int pageSize = 8;
+            int pageNumber = (page ?? 1);
+            return View(jobs.ToPagedList(pageNumber, pageSize));
+            //return View(db.Jobs.ToList());
         }
 
         // GET: Jobs/Details/5
