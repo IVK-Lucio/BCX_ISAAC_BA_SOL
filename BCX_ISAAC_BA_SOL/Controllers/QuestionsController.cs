@@ -57,7 +57,7 @@ namespace BCX_ISAAC_BA_SOL.Controllers
             {
                 question.Id = Guid.NewGuid().ToString();
                 int count = db.Questions.Where(q => q.JobId == question.JobId).Count();
-                question.Rank = count + 1;
+                question.Rank = getNextRank(question.JobId);
                 db.Questions.Add(question);
                 db.SaveChanges();
                 string add = "/Jobs/Details/" + question.JobId;
@@ -68,6 +68,32 @@ namespace BCX_ISAAC_BA_SOL.Controllers
             return View(question);
         }
 
+        public int getNextRank(string jobId)
+        {
+            //get maximum value;
+            int maxvalue = db.Questions.Where(q => q.JobId == jobId).Max(q => q.Rank).Value;
+            //get count;
+            int count = db.Questions.Where(q => q.JobId == jobId).Count();
+            int retValue = 0;
+            if (maxvalue > count)
+            {
+                for(int xt=1; xt<maxvalue; xt++)
+                {
+                   
+                        int? countvalue = db.Questions.Where(q => q.Rank == xt && q.JobId==jobId).Select(q => q.Rank).FirstOrDefault();
+                        if (countvalue == null)
+                        {
+                            retValue = xt;
+                        }
+                   
+                }
+            }
+            else
+            {
+                retValue = count + 1;
+            }
+            return retValue;
+        }
         // GET: Questions/Edit/5
         public ActionResult Edit(string id)
         {

@@ -92,38 +92,40 @@
     @Html.ActionLink("Back to List", "Index")
 </p>
 <h4>Questions   |   <a href="/Questions/Create/@Model.Id" class="btn btn-primary btn-sm">Create Questions</a> </h4>
-<table class="table table-bordered table-striped">
-    <tr>
-        @*<th>
-            @Html.DisplayName("Position")
-        </th>*@
-        <th>
-            @Html.DisplayName("Question Text")
-        </th>
-        <th>
-            @Html.DisplayName("Rank")
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model.Questions.OrderBy(q=>q.Rank))
-    {
+<div style="background-color:#c4c4c4;border-radius:5px;">
+    <table class="table table-bordered table-striped">
         <tr>
-            @*<td>
-                @Html.DisplayFor(modelItem => item.Job.Position)
-            </td>*@
-            <td>
-                @Html.DisplayFor(modelItem => item.QText)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Rank)
-            </td>
-            <td>
-                <a href="/Questions/Edit/@item.Id" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-edit"></span> Edit</a> |
-               <a href="/Questions/Delete/@item.Id" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-remove"></span> Delete</a>
-               
-            </td>
+            @*<th>
+                    @Html.DisplayName("Position")
+                </th>*@
+            <th>
+                @Html.DisplayName("Question Text")
+            </th>
+            <th>
+                @Html.DisplayName("Rank")
+            </th>
+            <th></th>
         </tr>
-    }
 
-</table>
+        @foreach (var item in Model.Questions.OrderBy(q => q.Rank))
+        {
+            <tr>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.Job.Position)
+                    </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.QText)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Rank)
+                </td>
+                <td>
+                    <a href="/Questions/Edit/@item.Id" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-edit"></span> Edit</a> |
+                    <a href="/Questions/Delete/@item.Id" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-remove"></span> Delete</a>
+
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

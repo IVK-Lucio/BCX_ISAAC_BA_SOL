@@ -1,35 +1,34 @@
 ﻿@model BCX_ISAAC_BA_SOL.Models.JobApplication
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Apply for Job";
 }
-
-<h2>Create</h2>
-
 
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>JobApplication</h4>
+        <h4>Create JobApplication</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
+        @Html.HiddenFor(model=>model.Id)
+        @Html.Hidden("JobId")
+        @*<div class="form-group">
             @Html.LabelFor(model => model.Id, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Id, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Id, "", new { @class = "text-danger" })
             </div>
-        </div>
+        </div>*@
 
-        <div class="form-group">
+        @*<div class="form-group">
             @Html.LabelFor(model => model.JobId, "JobId", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("JobId", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.JobId, "", new { @class = "text-danger" })
             </div>
-        </div>
+        </div>*@
 
         <div class="form-group">
             @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })

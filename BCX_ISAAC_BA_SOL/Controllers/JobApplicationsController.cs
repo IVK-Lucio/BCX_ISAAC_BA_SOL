@@ -20,7 +20,11 @@ namespace BCX_ISAAC_BA_SOL.Controllers
             var jobApplications = db.JobApplications.Include(j => j.Job);
             return View(jobApplications.ToList());
         }
+        public ActionResult DisplayJobs()
+        {
 
+            return View(db.Jobs.ToList());
+        }
         // GET: JobApplications/Details/5
         public ActionResult Details(string id)
         {
@@ -37,9 +41,10 @@ namespace BCX_ISAAC_BA_SOL.Controllers
         }
 
         // GET: JobApplications/Create
-        public ActionResult Create()
+        public ActionResult Create(string Id)
         {
-            ViewBag.JobId = new SelectList(db.Jobs, "Id", "Position");
+
+            ViewBag.JobId = Id;
             return View();
         }
 
