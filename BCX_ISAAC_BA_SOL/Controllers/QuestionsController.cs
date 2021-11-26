@@ -70,10 +70,12 @@ namespace BCX_ISAAC_BA_SOL.Controllers
 
         public int getNextRank(string jobId)
         {
-            //get maximum value;
-            int maxvalue = db.Questions.Where(q => q.JobId == jobId).Max(q => q.Rank).Value;
             //get count;
             int count = db.Questions.Where(q => q.JobId == jobId).Count();
+            //get maximum value;
+            int maxvalue = (count==0) ? 0: db.Questions.Where(q => q.JobId == jobId).Max(q => q.Rank).Value;
+            
+           
             int retValue = 0;
             if (maxvalue > count)
             {
