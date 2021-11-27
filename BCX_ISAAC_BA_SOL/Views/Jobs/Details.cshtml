@@ -7,7 +7,7 @@
 
 
 <div>
-    <h4>Job Details   |   @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |  @Html.ActionLink("Details", "Details", new { id = Model.Id }) | @Html.ActionLink("Delete", "Delete", new { id = Model.Id })</h4>
+    <h4>Job Details   |   @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |   @Html.ActionLink("Delete", "Delete", new { id = Model.Id })</h4>
     
     
     
@@ -105,7 +105,7 @@
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
-<h4>Questions   |   <a href="/Questions/Create/@Model.Id" class="btn btn-primary btn-sm">Create Questions</a> </h4>
+<h4>Questions   |   <a href="/Questions/Create/@Model.Id" class="btn btn-primary btn-sm">Create Questions</a> | <a href="/Jobs/SetQuestionTime/@Model.Id" class="btn btn-primary btn-sm">Set Question Time</a></h4>
 <div style="border-radius:5px;">
     <table class="table table-bordered table-striped">
         <tr>

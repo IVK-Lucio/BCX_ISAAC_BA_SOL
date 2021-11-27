@@ -53,7 +53,7 @@ namespace BCX_ISAAC_BA_SOL.Controllers
                     break;
 
                 default:  // Name ascending 
-                    jobs = jobs.OrderBy(s => s.Position);
+                    jobs = jobs.OrderByDescending(s => s.DatePosted);
                     break;
             }
             ViewBag.JobsCount = jobs.Count();
@@ -110,7 +110,7 @@ namespace BCX_ISAAC_BA_SOL.Controllers
                     break;
 
                 default:  // Name ascending 
-                    jobs = jobs.OrderBy(s => s.Position);
+                    jobs = jobs.OrderByDescending(s => s.DatePosted);
                     break;
             }
             ViewBag.JobsCount = jobs.Count();
@@ -118,6 +118,11 @@ namespace BCX_ISAAC_BA_SOL.Controllers
             int pageNumber = (page ?? 1);
             return View(jobs.ToPagedList(pageNumber, pageSize));
             //return View(db.Jobs.ToList());
+        }
+        public ActionResult SetQuestionTime(string Id)
+        {
+            ViewBag.JobId = Id;
+            return View();
         }
         // GET: Jobs/Details/5
         public ActionResult Details(string id)
