@@ -74,6 +74,51 @@ namespace BCX_ISAAC_BA_SOL.Controllers
             return Json(jobs);
 
         }
+        public ActionResult DisplayJobs(string sortOrder, string currentFilter, string searchString, int? page)
+        {
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewBag.DateSortParm = sortOrder == "Job_name" ? "Job_desc" : "job_name";
+
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
+
+
+            var jobs = from s in db.Jobs
+                       select s;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                jobs = jobs.Where(s => s.Position.Contains(searchString)
+                                       || s.Description.Contains(searchString));
+            }
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    jobs = jobs.OrderByDescending(s => s.Position);
+                    break;
+                case "job_name":
+                    jobs = jobs.OrderBy(s => s.Position);
+                    break;
+
+                default:  // Name ascending 
+                    jobs = jobs.OrderBy(s => s.Position);
+                    break;
+            }
+            ViewBag.JobsCount = jobs.Count();
+            int pageSize = 8;
+            int pageNumber = (page ?? 1);
+            return View(jobs.ToPagedList(pageNumber, pageSize));
+            //return View(db.Jobs.ToList());
+        }
         // GET: Jobs/Details/5
         public ActionResult Details(string id)
         {
@@ -100,7 +145,7 @@ namespace BCX_ISAAC_BA_SOL.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Position,Description,CompanyName,Location,Designation,EngagementType,CompanyWebsite,UserName,ActiveStatus")] Job job)
+        public ActionResult Create([Bind(Include = "Id,Position,Amount,Period,Description,CompanyName,Location,Designation,EngagementType,CompanyWebsite,UserName,ActiveStatus")] Job job)
         {
             if (ModelState.IsValid)
             {
@@ -136,7 +181,7 @@ namespace BCX_ISAAC_BA_SOL.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Position,Description,CompanyName,Location,Designation,EngagementType,CompanyWebsite,UserName,ActiveStatus,DatePosted")] Job job)
+        public ActionResult Edit([Bind(Include = "Id,Position,Amount,Period,Description,CompanyName,Location,Designation,EngagementType,CompanyWebsite,UserName,ActiveStatus,DatePosted")] Job job)
         {
             if (ModelState.IsValid)
             {

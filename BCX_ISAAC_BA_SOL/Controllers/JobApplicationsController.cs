@@ -20,11 +20,7 @@ namespace BCX_ISAAC_BA_SOL.Controllers
             var jobApplications = db.JobApplications.Include(j => j.Job);
             return View(jobApplications.ToList());
         }
-        public ActionResult DisplayJobs()
-        {
-
-            return View(db.Jobs.ToList());
-        }
+       
         // GET: JobApplications/Details/5
         public ActionResult Details(string id)
         {

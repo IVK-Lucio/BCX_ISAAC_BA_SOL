@@ -56,6 +56,9 @@ namespace BCX_ISAAC_BA_SOL.Models
         [Display(Name = "Status")]
         public bool? Status { get; set; }
 
+        [Display(Name = "Time Answered")]
+        public TimeSpan AnsweredTime { get; set; }
+
         [DataType(DataType.Date)]
         [Display(Name = "Date Created")]
         [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy}", ApplyFormatInEditMode = true)]

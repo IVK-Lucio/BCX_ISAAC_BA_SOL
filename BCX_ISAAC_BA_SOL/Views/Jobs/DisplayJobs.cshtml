@@ -2,20 +2,19 @@
 @model PagedList.IPagedList<BCX_ISAAC_BA_SOL.Models.Job>
 @using PagedList.Mvc;
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
-
 @{
-    ViewBag.Title = "Index";
-
+    ViewBag.Title = "Display Jobs";
 }
+
 <div class="row">
     <div class="panel-group" role="tablist" aria-multiselectable="true">
 
         <div class="panel panel-default">
             <div class="panel-heading" role="tab">
                 <h4>
-                    Job Posts |  @Html.ActionLink("Post Job", "Create")
+                   Available Jobs 
                     <span class="pull-right" style="padding-top:-5px;">
-                        <form  role="search" action="/Jobs/" method="Get">
+                        <form role="search" action="/Jobs/DisplayJobs" method="Get">
                             <div class="input-group md-form form-sm form-2 pl-0">
                                 <input name="SearchString" id="SearchString" class="form-control my-0 py-1 amber-border" placeholder="Search" type="text" style="width:70%;">
                                 <span class="input-group-append"><button type="submit" class="btn btn-primary">Search</button></span>
@@ -28,14 +27,15 @@
 
             <div class="panel-body">
 
+
                 <div class="row">
                     @foreach (var item in Model)
                     {
 
                         <div class="col-sm-6 col-md-3">
 
-                            <a href="/Jobs/Details/@item.Id" style="text-decoration:none;color:black;">
-                                <div class="thumbnail" style="background-color:#e5e5e5;border:5px solid;border-color:#140635;padding:5px 5px 20px 5px;border-radius:15px 15px;margin:4px 4px 5px 4px;">
+                            <a href="/JobApplications/Create/@item.Id" style="text-decoration:none;color:black;">
+                                <div class="thumbnail" style="background-color:#e5e5e5;border:5px solid;border-color:#140635;padding:5px 5px 20px 5px;border-radius:15px 15px;margin:4px 4px 5px 4px">
                                     <div style="height:70px;"><h2>@Html.DisplayFor(modelItem => item.Position)</h2></div>
                                     @{ string rate = item.Amount + "/" + item.Period;}
                                     <p><strong>@rate</strong></p>
@@ -55,17 +55,17 @@
         </div>
     </div>
 </div>
-                <div>
-                    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+<div>
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
 
-                    @Html.PagedListPager(Model, page => Url.Action("Index",
-                    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
-                </div>
-                @functions{
-                    public string ShortenText(string txt)
-                    {
+    @Html.PagedListPager(Model, page => Url.Action("DisplayJobs",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+</div>
+@functions{
+    public string ShortenText(string txt)
+    {
 
-                        return txt.Substring(0, 70);
-                    }
+        return txt.Substring(0, 70);
+    }
 
-                }
+}

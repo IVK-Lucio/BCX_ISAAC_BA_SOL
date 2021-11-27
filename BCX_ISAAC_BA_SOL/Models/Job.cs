@@ -22,6 +22,12 @@ namespace BCX_ISAAC_BA_SOL.Models
         [Display(Name = "Position")]
         public string Position { get; set; }
 
+        [Display(Name = "Amount")]
+        public string Amount { get; set; }
+
+        [Display(Name = "Period")]
+        public string Period { get; set; }
+
         [Display(Name = "Description")]
         public string Description { get; set; }
 
