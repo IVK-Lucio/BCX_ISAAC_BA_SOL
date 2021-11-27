@@ -62,7 +62,18 @@ namespace BCX_ISAAC_BA_SOL.Controllers
             return View(jobs.ToPagedList(pageNumber, pageSize));
             //return View(db.Jobs.ToList());
         }
+        [HttpPost]
+        public JsonResult AutoComplete(string prefix)
+        {
 
+            var jobs = from s in db.Jobs
+                       where (s.Position.Contains(prefix) || s.Description.Contains(prefix)) && s.ActiveStatus == true
+                       select new { label = s.Position, val = s.Id };
+
+
+            return Json(jobs);
+
+        }
         // GET: Jobs/Details/5
         public ActionResult Details(string id)
         {

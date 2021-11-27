@@ -41,16 +41,50 @@
         </center>
     </div>
     <div class="container body-content">
-        
+
         @RenderBody()
         <hr />
         <footer>
             <p>&copy; @DateTime.Now.Year - BCX Job Application</p>
         </footer>
     </div>
-
-            @Scripts.Render("~/bundles/jquery")
-            @Scripts.Render("~/bundles/bootstrap")
-            @RenderSection("scripts", required: false)
+    @Styles.Render("~/bundles/cssjqryUi")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @*@Scripts.Render("~/bundles/bootstrap")*@
+    @Scripts.Render("~/bundles/jqueryui")
+    @RenderSection("scripts", required: false)
+    <script type="text/javascript">
+        $(function () {
+            $("#SearchString").autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        url: '/Jobs/AutoComplete/',
+                        data: "{ 'prefix': '" + request.term + "'}",
+                        dataType: "json",
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        success: function (data) {
+                            response($.map(data, function (item) {
+                                return item;
+                            }))
+                        },
+                        error: function (response) {
+                            alert(response.responseText);
+                        },
+                        failure: function (response) {
+                            alert(response.responseText);
+                        }
+                    });
+                },
+                //select: function (e, i) {
+                //    $("#ftsearch").val(i.item.val);
+                //},
+                //minLength: 0
+            }).focus(function () {
+                $(this).autocomplete("search");
+            });
+        });
+    </script>
 </body>
 </html>

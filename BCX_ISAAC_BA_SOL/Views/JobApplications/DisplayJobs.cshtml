@@ -3,7 +3,19 @@
 @{
     ViewBag.Title = "DisplayJobs";
 }
+<h4>
+    Jobs Posted
+    <span class="pull-right">
+        <form class="navbar-form navbar-right" role="search" action="/Jobs/" method="Get">
+            <div class="form-group">
+                <input name="SearchString" id="SearchString" class="form-control" placeholder="Search" type="text" style="width:250px;">
+            </div>
+            <button type="submit" class="form-control">Search</button>
+        </form>
+    </span>
+</h4>
 
+<br />
 
 <div class="row">
     @foreach (var item in Model)
