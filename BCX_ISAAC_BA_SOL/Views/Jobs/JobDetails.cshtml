@@ -1,0 +1,22 @@
+﻿@model BCX_ISAAC_BA_SOL.Models.Job
+
+@{
+    ViewBag.Title = "Job Details";
+}
+
+<div>
+    <h1>@Html.DisplayFor(model => model.Position)</h1>
+    @{ string rate = Model.Amount + "/" + Model.Period;}
+    <p><strong>@rate</strong></p>
+    <p> @Html.DisplayFor(model => model.Designation)    |    @Html.DisplayFor(model => model.EngagementType)</p>
+    <h4> @Html.DisplayFor(model => model.CompanyName) -  @Html.DisplayFor(model => model.Location)</h4>
+    @{ string today = @String.Format("{0:dd-MMM-yyyy}", DateTime.Now);
+        DateTime tday = Convert.ToDateTime(today);
+        TimeSpan ds = tday.Subtract(Convert.ToDateTime(Model.DatePosted));
+        }
+    <p><span class="glyphicon glyphicon-time"></span><b>Posted: @ds.TotalDays days ago</b>   </p>
+    <p>Total Applicants: @ViewBag.JobApp   | <a href="/JobApplications/" class="btn btn-primary btn-sm">Apply</a></p>
+    <h4>@Html.DisplayNameFor(model => model.Description)</h4>
+    <p>@Html.DisplayFor(model => model.Description)</p>
+  </div>
+<h4><a href="/JobApplications/" class="btn btn-primary btn-sm">Apply Now</a></h4>

@@ -136,6 +136,14 @@ namespace BCX_ISAAC_BA_SOL.Controllers
             string addurl = "/Jobs/Details/" + jobId;
             return Redirect(addurl);
         }
+        
+        public ActionResult JobDetails(string Id)
+        {
+            ViewBag.JobId = Id;
+            Job jb = db.Jobs.Find(Id);
+            ViewBag.JobApp = db.JobApplications.Where(j => j.JobId == Id).Count();
+            return View(jb);
+        }
         // GET: Jobs/Details/5
         public ActionResult Details(string id)
         {
