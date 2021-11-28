@@ -1,12 +1,14 @@
 ﻿
 @{
-    ViewBag.Title = "SetQuestionTime";
+    ViewBag.Title = "Set Question Time";
 }
 
-<h4>Set Question Time</h4>
-<form method="post" action="/Jobs/SetQuestionTime">
-    <input type="hidden" name="JobId" value="@ViewBag.JobId" />
-    <input type="number" name="questiontime" class="form-group-sm" value="" />
-    <input type="submit" class="btn btn-primary btn-sm" value="Set Time" />
-</form>
-
+<h4>Set Question Time (Seconds)</h4>
+<div class="form-horizontal">
+    <form method="post" action="/Jobs/SetQuestionTime">
+        <input type="hidden" name="JobId" value="@ViewBag.JobId" />
+        <input type="number" name="questiontime" class="form-control" value="15" min="1" max="60" />
+        <br />
+        <input type="submit" class="btn btn-primary btn-sm" value="Set Time" />
+    </form>
+</div>

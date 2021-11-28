@@ -37,7 +37,13 @@
                             <a href="/Jobs/Details/@item.Id" style="text-decoration:none;color:black;">
                                 <div class="thumbnail" style="background-color:#e5e5e5;border:5px solid;border-color:#140635;padding:5px 5px 20px 5px;border-radius:15px 15px;margin:4px 4px 5px 4px;">
                                     <div style="height:70px;"><h2>@Html.DisplayFor(modelItem => item.Position)</h2></div>
-                                    @{ string rate = item.Amount + "/" + item.Period;}
+                                    @{ string rate = "";
+                                        if (item.Amount != null)
+                                        {
+                                            rate = item.Amount + "/" + item.Period;
+                                        }
+
+                                        }
                                     <p><strong>@rate</strong></p>
                                     <p> @Html.DisplayFor(modelItem => item.Designation) |  @Html.DisplayFor(modelItem => item.EngagementType)</p>
                                     <h4><span class="glyphicon glyphicon-certificate logo-small" style="color:red"></span>@Html.DisplayFor(modelItem => item.CompanyName)</h4>

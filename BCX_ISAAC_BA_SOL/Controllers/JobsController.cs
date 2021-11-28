@@ -124,6 +124,18 @@ namespace BCX_ISAAC_BA_SOL.Controllers
             ViewBag.JobId = Id;
             return View();
         }
+        [HttpPost]
+        public ActionResult SetQuestionTime()
+        {
+            string jobId = Request.Form["JobId"];
+            string questionTime = Request.Form["questiontime"];
+            Job jb = db.Jobs.Find(jobId);
+            jb.QuestionTime = Convert.ToInt32(questionTime);
+            db.Entry(jb).State = EntityState.Modified;
+            db.SaveChanges();
+            string addurl = "/Jobs/Details/" + jobId;
+            return Redirect(addurl);
+        }
         // GET: Jobs/Details/5
         public ActionResult Details(string id)
         {

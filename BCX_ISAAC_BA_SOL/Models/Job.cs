@@ -55,6 +55,9 @@ namespace BCX_ISAAC_BA_SOL.Models
         [Display(Name = "User Name")]
         public string UserName { get; set; }
 
+        [Display(Name = "Question Time")]
+        public int QuestionTime { get; set; }
+
         [Display(Name = "Active Status")]
         public bool? ActiveStatus { get; set; }
 
