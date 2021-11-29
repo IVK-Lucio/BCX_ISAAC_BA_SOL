@@ -1,6 +1,6 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Upload Resume";
+    string fileadd = "/Uploads/" + ViewBag.JobApplicationId + ".pdf";
 }
 
 <h4>Upload Resume    </h4>
@@ -10,6 +10,13 @@
     <input type="hidden" name="JobApplicationId" value="@ViewBag.JobApplicationId" />
     <input type="file" name="resume" onchange="submit();" />
 </form>
+<br />
+
+@if (ViewBag.ResumeUrl!=null) { 
+<div style="padding:15px 15px" class="alert-info">
+    CV/Resume Uploaded Successfully ... <a href="@fileadd">Download CV/Resume</a>
+</div>
+} 
 <hr />
 
 

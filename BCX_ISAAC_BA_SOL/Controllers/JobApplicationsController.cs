@@ -67,7 +67,12 @@ namespace BCX_ISAAC_BA_SOL.Controllers
         public ActionResult UploadResume(string id)
         {
             JobApplication ja = db.JobApplications.Find(id);
+            string reU = ja.ResumeUrl;
+            
             ViewBag.JobApplicationId = id;
+            if(ja.ResumeUrl!=null) ViewBag.ResumeUrl = ja.ResumeUrl;
+            if(Session["Msg"]!=null) ViewBag.Msg = Session["Msg"].ToString();
+
             return View();
         }
 
@@ -79,8 +84,8 @@ namespace BCX_ISAAC_BA_SOL.Controllers
             //string filename = Request.Form["Resume"];
             //foreach (string upload in Request.Files)
             //{
-                
-                if (!HasFile(Request.Files["resume"])) { 
+            bool yes = HasFile(Request.Files["resume"]);
+            if (HasFile(Request.Files["resume"])) { 
                 var allowedFileExtensions = new[] { ".pdf" };
                 string ext = Path.GetExtension(Request.Files["resume"].FileName).ToLower();
                 if (allowedFileExtensions.Contains(ext))
@@ -101,12 +106,12 @@ namespace BCX_ISAAC_BA_SOL.Controllers
 
                     Request.Files["resume"].SaveAs(path);
                     //addurl = "/JobApplications/UploadResume/" + jobApplicationId;
-                    
+                    Session.Clear();
                 }
                 else if (!allowedFileExtensions.Contains(ext))
                 {
-                    ViewBag.Msg = "Unsupported file format. Please upload only pdf files.";
-                   
+                    //ViewBag.Msg = "Unsupported file format. Please upload only pdf files.";
+                    Session["Msg"] = "Unsupported file format. Please upload only pdf files.";
                 }
             }
             //}

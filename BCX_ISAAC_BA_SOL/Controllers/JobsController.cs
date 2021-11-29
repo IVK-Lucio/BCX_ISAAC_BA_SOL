@@ -139,6 +139,7 @@ namespace BCX_ISAAC_BA_SOL.Controllers
         public ActionResult BeginApplication(string Id)
         {
             ViewBag.JobId = Id;
+            Session.Clear();
             return View();
         }
         
