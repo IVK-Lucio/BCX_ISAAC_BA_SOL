@@ -15,8 +15,8 @@
         TimeSpan ds = tday.Subtract(Convert.ToDateTime(Model.DatePosted));
         }
     <p><span class="glyphicon glyphicon-time"></span><b>Posted: @ds.TotalDays days ago</b>   </p>
-    <p>Total Applicants: @ViewBag.JobApp   | <a href="/JobApplications/" class="btn btn-primary btn-sm">Apply</a></p>
+    <p>Total Applicants: <b>@ViewBag.JobApp</b>   | <a href="/Jobs/BeginApplication/@Model.Id" class="btn btn-primary btn-sm">Apply</a></p>
     <h4>@Html.DisplayNameFor(model => model.Description)</h4>
     <p>@Html.DisplayFor(model => model.Description)</p>
   </div>
-<h4><a href="/JobApplications/" class="btn btn-primary btn-sm">Apply Now</a></h4>
+<h4><a href="/Jobs/DisplayJobs" class="btn btn-primary btn-sm">Back</a>  |   <a href="/Jobs/BeginApplication/@Model.Id" class="btn btn-primary btn-sm">Apply Now</a></h4>

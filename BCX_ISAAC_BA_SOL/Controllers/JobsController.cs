@@ -136,6 +136,11 @@ namespace BCX_ISAAC_BA_SOL.Controllers
             string addurl = "/Jobs/Details/" + jobId;
             return Redirect(addurl);
         }
+        public ActionResult BeginApplication(string Id)
+        {
+            ViewBag.JobId = Id;
+            return View();
+        }
         
         public ActionResult JobDetails(string Id)
         {

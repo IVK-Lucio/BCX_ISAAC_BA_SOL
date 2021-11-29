@@ -1,0 +1,16 @@
+﻿
+@{
+    ViewBag.Title = "Begin Application";
+}
+
+<h4>Begin Application   |   <a href="/Jobs/JobDetails/@ViewBag.JobId" class="btn btn-primary btn-sm">Go Back</a></h4>
+<div class="alert-success" style="padding:15px 15px">
+    Please provide your email address to continue...
+</div>
+<br />
+<form method="post" action="/JobApplications/BeginApplication/">
+    <input type="hidden" name="JobId" value="@ViewBag.JobId"  />
+    <input type="email" name="emailaddress" class="form-control" placeholder="provide email address" required/>
+    <br />
+    <input type="submit" class="btn btn-primary btn-sm" value="continue"/>
+</form>

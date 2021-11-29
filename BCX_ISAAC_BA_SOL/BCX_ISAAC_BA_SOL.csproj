@@ -327,9 +327,12 @@
     <Content Include="Views\Jobs\DisplayJobs.cshtml" />
     <Content Include="Views\Jobs\SetQuestionTime.cshtml" />
     <Content Include="Views\Jobs\JobDetails.cshtml" />
+    <Content Include="Views\Jobs\BeginApplication.cshtml" />
+    <Content Include="Views\JobApplications\UploadResume.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Uploads\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

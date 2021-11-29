@@ -1,0 +1,15 @@
+﻿
+@{
+    ViewBag.Title = "Upload Resume";
+}
+
+<h4>Upload Resume    </h4>
+@if (ViewBag.Msg != null)
+{<text><div style="padding:15px 15px;" class="alert-warning">@ViewBag.Msg</div></text>}
+<form method="post" action="/JobApplications/UploadResume" enctype = "multipart/form-data">
+    <input type="hidden" name="JobApplicationId" value="@ViewBag.JobApplicationId" />
+    <input type="file" name="resume" onchange="submit();" />
+</form>
+<hr />
+
+
