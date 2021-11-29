@@ -73,7 +73,7 @@ namespace BCX_ISAAC_BA_SOL.Controllers
             if(ja.ResumeUrl!=null) ViewBag.ResumeUrl = ja.ResumeUrl;
             if(Session["Msg"]!=null) ViewBag.Msg = Session["Msg"].ToString();
 
-            return View();
+            return View(ja);
         }
 
         [HttpPost]
