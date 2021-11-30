@@ -53,6 +53,10 @@ namespace BCX_ISAAC_BA_SOL.Models
         [Display(Name = "Email Address")]
         public string EmailAddress { get; set; }
 
+        [StringLength(128)]
+        [Display(Name = "Highest Qualification")]
+        public string Qualification { get; set; }
+
         [Display(Name = "Status")]
         public bool? Status { get; set; }
 

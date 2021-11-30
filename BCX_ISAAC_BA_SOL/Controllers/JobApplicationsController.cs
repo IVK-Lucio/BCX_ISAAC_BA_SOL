@@ -64,11 +64,16 @@ namespace BCX_ISAAC_BA_SOL.Controllers
             }
             return View(jobApplication);
         }
+        public ActionResult Application(JobApplication ja)
+        {
+
+            return View();
+        }
         public ActionResult UploadResume(string id)
         {
             JobApplication ja = db.JobApplications.Find(id);
             string reU = ja.ResumeUrl;
-            
+            ViewBag.JobId = ja.JobId;
             ViewBag.JobApplicationId = id;
             if(ja.ResumeUrl!=null) ViewBag.ResumeUrl = ja.ResumeUrl;
             if(Session["Msg"]!=null) ViewBag.Msg = Session["Msg"].ToString();
