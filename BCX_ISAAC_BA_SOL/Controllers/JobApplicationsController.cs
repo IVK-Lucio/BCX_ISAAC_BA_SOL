@@ -64,9 +64,13 @@ namespace BCX_ISAAC_BA_SOL.Controllers
             }
             return View(jobApplication);
         }
+
+        [HttpPost]
         public ActionResult Application(JobApplication ja)
         {
 
+            db.Entry(ja).State = EntityState.Modified;
+            db.SaveChanges();
             return View();
         }
         public ActionResult UploadResume(string id)
@@ -128,6 +132,9 @@ namespace BCX_ISAAC_BA_SOL.Controllers
         {
             return (file != null && file.ContentLength > 0) ? true : false;
         }
+
+        
+       
         // GET: JobApplications/Create
         public ActionResult Create(string Id)
         {

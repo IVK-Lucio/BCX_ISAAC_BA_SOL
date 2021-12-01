@@ -26,7 +26,11 @@
     using (Html.BeginForm("Application","JobApplications", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
     {
 <div class="form-horizontal">
-    @Html.Hidden("JobApplicationId")
+    @Html.Hidden("Id",(string)ViewBag.JobApplicationId)
+    @Html.HiddenFor(model => model.EmailAddress)
+    @Html.HiddenFor(model => model.JobId)
+    @Html.HiddenFor(model=>model.ResumeUrl)
+
     <div class="form-group">
         @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
