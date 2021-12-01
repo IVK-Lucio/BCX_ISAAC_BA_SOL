@@ -71,7 +71,7 @@ namespace BCX_ISAAC_BA_SOL.Controllers
 
             db.Entry(ja).State = EntityState.Modified;
             db.SaveChanges();
-            string urlAdd = "/Questions/AnserQuestions?JobId=" + ja.JobId + "&" + "JobApplicationId=" + ja.Id;
+            string urlAdd = "/Questions/AnswerQuestions?JobId=" + ja.JobId + "&" + "JobApplicationId=" + ja.Id;
             return Redirect(urlAdd);
         }
         public ActionResult UploadResume(string id)

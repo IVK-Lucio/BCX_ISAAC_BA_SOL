@@ -49,7 +49,10 @@ namespace BCX_ISAAC_BA_SOL.Controllers
         {
             ViewBag.JobId = JobId;
             ViewBag.JobApplicationId = JobApplicationId;
-            var questions = db.Questions.Where(q => q.JobId == JobId).ToList();
+            ViewBag.ApplicantName = (from s in db.JobApplications where s.Id == JobApplicationId select new { Name = s.LastName.ToUpper() + ", " + s.FirstName + " " + s.OtherNames }).Select(j => j.Name).FirstOrDefault();
+            ViewBag.Position = db.Jobs.Find(JobId).Position;
+            ViewBag.QuestionTime = db.Jobs.Find(JobId).QuestionTime;
+            var questions = db.Questions.Where(q => q.JobId == JobId).OrderBy(q=>q.Rank).ToList();
 
             return View(questions);
         }
