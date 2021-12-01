@@ -329,6 +329,7 @@
     <Content Include="Views\Jobs\JobDetails.cshtml" />
     <Content Include="Views\Jobs\BeginApplication.cshtml" />
     <Content Include="Views\JobApplications\UploadResume.cshtml" />
+    <Content Include="Views\Questions\AnswerQuestions.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

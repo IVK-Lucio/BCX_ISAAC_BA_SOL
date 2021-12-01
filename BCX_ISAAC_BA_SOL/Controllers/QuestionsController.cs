@@ -45,7 +45,14 @@ namespace BCX_ISAAC_BA_SOL.Controllers
             ViewBag.Position = position;
             return View();
         }
+        public ActionResult AnswerQuestions(string JobId,string JobApplicationId)
+        {
+            ViewBag.JobId = JobId;
+            ViewBag.JobApplicationId = JobApplicationId;
+            var questions = db.Questions.Where(q => q.JobId == JobId).ToList();
 
+            return View(questions);
+        }
         // POST: Questions/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
