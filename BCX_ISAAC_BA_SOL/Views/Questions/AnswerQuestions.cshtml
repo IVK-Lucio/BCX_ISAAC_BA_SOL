@@ -4,14 +4,13 @@
     ViewBag.Title = "Answer Questions";
 }
 
-
 <h4>Name: <strong>@ViewBag.ApplicantName</strong> </h4>
 <h5>Position: <strong>@ViewBag.Position</strong></h5>
 <br />
 <h4>Questions   |   Time: @ViewBag.QuestionTime (Seconds)</h4>
 <br />
-<form method="post" action="/Answers/">
-
+<form method="post" action="/Answers/SubmitAnswers">
+    <input type="hidden" name="JobapplicationId" value="@ViewBag.JobApplicationId" />
 
     @foreach (var item in Model)
     {

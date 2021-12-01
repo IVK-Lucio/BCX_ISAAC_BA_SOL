@@ -62,7 +62,26 @@ namespace BCX_ISAAC_BA_SOL.Controllers
             ViewBag.QuestionId = new SelectList(db.Questions, "Id", "JobId", answer.QuestionId);
             return View(answer);
         }
-
+        public ActionResult SubmitAnswers()
+        {
+            string jobapplicationId = Request.Form["JobapplicationId"];
+            string[] questionId = Request.Form.GetValues("QuestionId");
+            string[] answer = Request.Form.GetValues("Answer");
+            var count = (questionId!=null)?questionId.Count():0;
+            if (count != 0) {
+                for (int n=0; n < count; n++)
+                {
+                    Answer an = new Answer();
+                    an.Id = Guid.NewGuid().ToString();
+                    an.QuestionId = questionId[n];
+                    an.AText = answer[n];
+                    an.JobApplicationId = jobapplicationId;
+                    db.Answers.Add(an);
+                    db.SaveChanges();
+                }
+            }
+            return View();
+        }
         // GET: Answers/Edit/5
         public ActionResult Edit(string id)
         {
