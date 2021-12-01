@@ -21,6 +21,23 @@ namespace BCX_ISAAC_BA_SOL.Controllers
             var jobApplications = db.JobApplications.Include(j => j.Job);
             return View(jobApplications.ToList());
         }
+        public ViewResult Applications(string id)
+        {
+            ViewBag.JobApp = db.JobApplications.Where(js => js.JobId == id).Count();
+            Job j = db.Jobs.Find(id);
+            ViewBag.Position = j.Position;
+            ViewBag.Amount = j.Amount;
+            ViewBag.Period = j.Period;
+            ViewBag.Designation = j.Designation;
+            ViewBag.Description = j.Description;
+            ViewBag.DatePosted = j.DatePosted;
+            ViewBag.CompanyName = j.CompanyName;
+            ViewBag.Location = j.Location;
+            ViewBag.EngagementType = j.EngagementType;
+            var ja = db.JobApplications.Where(js => js.JobId == id).ToList();
+
+            return View(ja);
+        }
         [HttpPost]
         public ActionResult BeginApplication()
         {

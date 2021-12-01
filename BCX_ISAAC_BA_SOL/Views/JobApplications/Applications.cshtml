@@ -1,0 +1,99 @@
+﻿@model IEnumerable<BCX_ISAAC_BA_SOL.Models.JobApplication>
+
+@{
+    ViewBag.Title = "Applications";
+}
+
+
+<div>
+    <h1>@ViewBag.Position</h1>
+    @{ string rate = ViewBag.Amount + "/" + ViewBag.Period;}
+    <p><strong>@rate</strong></p>
+    <p> @ViewBag.Designation   |    @ViewBag.EngagementType</p>
+    <h4> @ViewBag.CompanyName -  @ViewBag.Location</h4>
+    @{ string today = @String.Format("{0:dd-MMM-yyyy}", DateTime.Now);
+        DateTime tday = Convert.ToDateTime(today);
+        TimeSpan ds = tday.Subtract(Convert.ToDateTime(ViewBag.DatePosted));
+    }
+    <p><span class="glyphicon glyphicon-time"></span><b>Posted: @ds.TotalDays days ago</b>   </p>
+    
+    <h4>Description</h4>
+    <p>@ViewBag.Description</p>
+</div>
+<br />
+<p>Applications    |   Total Applicants: <b>@ViewBag.JobApp</b></p>
+<table class="table table-bordered table-striped">
+    <tr>
+        
+        <th>
+          @Html.DisplayName("Name of Applicant")
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Sex)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MaritalStatus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateOfBirth)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ResumeUrl)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EmailAddress)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Qualification)
+        </th>
+       
+        <th>
+            @Html.DisplayNameFor(model => model.AnsweredTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateCreated)
+        </th>
+        @*<th></th>*@
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            
+            <td>
+                <a href="/JobApplications/Details/@item.Id">@Html.DisplayFor(modelItem => item.FirstName)&nbsp;@Html.DisplayFor(modelItem => item.LastName)&nbsp;@Html.DisplayFor(modelItem => item.OtherNames)</a>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sex)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaritalStatus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateOfBirth)
+            </td>
+            <td>
+                <a href="/Uploads/@item.ResumeUrl" >View CV/Resume</a>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmailAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Qualification)
+            </td>
+           
+            <td>
+                @Html.DisplayFor(modelItem => item.AnsweredTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateCreated)
+            </td>
+            @*<td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>*@
+        </tr>
+    }
+
+</table>
