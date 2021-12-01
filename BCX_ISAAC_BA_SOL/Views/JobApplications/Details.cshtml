@@ -4,10 +4,9 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
 
 <div>
-    <h4>JobApplication</h4>
+    <h4>JobApplication Details</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -71,7 +70,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ResumeUrl)
+            <a href="~/Uploads/@Html.DisplayFor(model => model.ResumeUrl)" target="_blank">View Resume</a>
         </dd>
 
         <dt>
@@ -96,3 +95,35 @@
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
+<h4>Questions      </h4>
+<table class="table table-bordered table-striped">
+    <tr>
+        <th>
+            @Html.DisplayName("Rank")
+        </th>
+        <th>
+            @Html.DisplayName("Questions")
+        </th>
+        <th>
+            @Html.DisplayName("Answer")
+        </th>
+       
+    </tr>
+
+    @foreach (var item in Model.Answers.OrderBy(a=>a.Question.Rank))
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Question.Rank)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Question.QText)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AText)
+            </td>
+            
+        </tr>
+    }
+
+</table>
