@@ -6,7 +6,7 @@
 
 
 <div>
-    <h4>JobApplication Details</h4>
+    <h4>JobApplication Details  |   <a href="/JobApplications/Applications/@Model.JobId" class="btn btn-primary btn-sm">Back</a>    |   <a href="/Jobs/Details/@Model.JobId" class="btn btn-primary btn-sm">Back to Job Details</a></h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -62,7 +62,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.DateOfBirth)
+            @String.Format("{0:dd-MMM-yyyy}", Model.DateOfBirth)
         </dd>
 
         <dt>
@@ -82,48 +82,47 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Status)
+            @Html.DisplayNameFor(model => model.Qualification)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Status)
+            @Html.DisplayFor(model => model.Qualification)
         </dd>
 
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
-<h4>Questions      </h4>
-<table class="table table-bordered table-striped">
-    <tr>
-        <th>
-            @Html.DisplayName("Rank")
-        </th>
-        <th>
-            @Html.DisplayName("Questions")
-        </th>
-        <th>
-            @Html.DisplayName("Answer")
-        </th>
-       
-    </tr>
 
-    @foreach (var item in Model.Answers.OrderBy(a=>a.Question.Rank))
-    {
+<h4>Questions and Answers   |   Time taken: @Model.AnsweredTime (sec)     </h4>
+<div class="table-responsive">
+    <table class="table table-bordered table-striped">
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Question.Rank)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Question.QText)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AText)
-            </td>
-            
-        </tr>
-    }
+            <th>
+                @Html.DisplayName("Rank")
+            </th>
+            <th>
+                @Html.DisplayName("Questions")
+            </th>
+            <th>
+                @Html.DisplayName("Answer")
+            </th>
 
-</table>
+        </tr>
+
+        @foreach (var item in Model.Answers.OrderBy(a => a.Question.Rank))
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Question.Rank)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Question.QText)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AText)
+                </td>
+
+            </tr>
+        }
+
+    </table>
+    </div>

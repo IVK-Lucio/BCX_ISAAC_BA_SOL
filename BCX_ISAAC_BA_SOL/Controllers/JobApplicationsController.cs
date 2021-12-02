@@ -34,6 +34,7 @@ namespace BCX_ISAAC_BA_SOL.Controllers
             ViewBag.CompanyName = j.CompanyName;
             ViewBag.Location = j.Location;
             ViewBag.EngagementType = j.EngagementType;
+            ViewBag.JobId = id;
             var ja = db.JobApplications.Where(js => js.JobId == id).ToList();
 
             return View(ja);
