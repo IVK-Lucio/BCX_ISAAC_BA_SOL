@@ -62,8 +62,10 @@ namespace BCX_ISAAC_BA_SOL.Controllers
             ViewBag.QuestionId = new SelectList(db.Questions, "Id", "JobId", answer.QuestionId);
             return View(answer);
         }
-        public ActionResult SubmitAnswers()
+
+        public ActionResult SubmitAnswers(string Id)
         {
+            if (Id == null) { 
             string jobapplicationId = Request.Form["JobapplicationId"];
             string[] questionId = Request.Form.GetValues("QuestionId");
             string[] answer = Request.Form.GetValues("Answer");
@@ -71,6 +73,9 @@ namespace BCX_ISAAC_BA_SOL.Controllers
             if (count != 0) {
                 for (int n=0; n < count; n++)
                 {
+                    string thisquestionid = questionId[n];
+                    var isCreated = db.Answers.Where(a => a.JobApplicationId == jobapplicationId && a.QuestionId == thisquestionid).Count();
+                    if (isCreated > 0) continue;
                     Answer an = new Answer();
                     an.Id = Guid.NewGuid().ToString();
                     an.QuestionId = questionId[n];
@@ -80,6 +85,8 @@ namespace BCX_ISAAC_BA_SOL.Controllers
                     db.SaveChanges();
                 }
             }
+            
+         }
             return View();
         }
         // GET: Answers/Edit/5

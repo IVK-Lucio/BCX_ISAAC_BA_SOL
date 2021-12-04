@@ -91,7 +91,7 @@
 
     </dl>
 </div>
-
+@if (Model.Answers.Count() > 0) { 
 <h4>Questions and Answers   |   Time taken: @Model.AnsweredTime (sec)     </h4>
 <div class="table-responsive">
     <table class="table table-bordered table-striped">
@@ -126,3 +126,4 @@
 
     </table>
     </div>
+}

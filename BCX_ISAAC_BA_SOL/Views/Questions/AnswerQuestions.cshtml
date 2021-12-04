@@ -1,7 +1,9 @@
 ﻿@model IEnumerable<BCX_ISAAC_BA_SOL.Models.Question>
 
 @{
-    ViewBag.Title = "Answer Questions";
+            /**/
+
+            ViewBag.Title = "Answer Questions";
 }
 
 <h4>Name: <strong>@ViewBag.ApplicantName</strong> </h4>
@@ -11,14 +13,34 @@
 <br />
 <form method="post" action="/Answers/SubmitAnswers">
     <input type="hidden" name="JobapplicationId" value="@ViewBag.JobApplicationId" />
-
+    <input type="hidden" name="StartTime" value="" />
     @foreach (var item in Model)
     {
-    <p> @Html.DisplayFor(modelItem => item.Rank).  @Html.DisplayFor(modelItem => item.QText)
-    <br />
-    <input type="hidden" name="QuestionId" value="@item.Id" />
-    <input type="text" name="Answer" class="form-control" />
-    </p>
+        <p>
+            @Html.DisplayFor(modelItem => item.Rank).  @Html.DisplayFor(modelItem => item.QText)
+            <br />
+            <input type="hidden" name="QuestionId" value="@item.Id" />
+            <input type="text" name="Answer" class="form-control" />
+        </p>
     }
-    <input type="submit"  class="btn btn-primary btn-sm" />
+    <input type="submit" class="btn btn-primary btn-sm" />
 </form>
+
+@functions{
+    public string ExecuteTimer()
+    {
+
+        var t = new Timer();
+
+        // Figure how much time until 4:00
+        DateTime now = DateTime.Now;
+        DateTime finalClock = DateTime.Now.AddSeconds(ViewBag.QuestionTime);
+
+        int msUntilFour = (int)((finalClock - now).TotalMilliseconds);
+
+        // Set the timer to elapse only once, at 4:00.
+        //t.Change(msUntilFour, Timeout.Infinite);
+        return "";
+    }
+
+}

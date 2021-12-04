@@ -89,7 +89,16 @@ namespace BCX_ISAAC_BA_SOL.Controllers
 
             db.Entry(ja).State = EntityState.Modified;
             db.SaveChanges();
-            string urlAdd = "/Questions/AnswerQuestions?JobId=" + ja.JobId + "&" + "JobApplicationId=" + ja.Id;
+            int count = db.Questions.Where(q => q.JobId == ja.JobId).Count();
+            string urlAdd = "";
+            if (count == 0) { 
+                urlAdd = "/Answers/SubmitAnswers/" + ja.JobId;
+            }
+            else
+            {
+                urlAdd = "/Questions/AnswerQuestions?JobId=" + ja.JobId + "&" + "JobApplicationId=" + ja.Id;
+            }
+           
             return Redirect(urlAdd);
         }
         public ActionResult UploadResume(string id)
