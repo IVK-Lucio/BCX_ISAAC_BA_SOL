@@ -45,6 +45,7 @@ namespace BCX_ISAAC_BA_SOL.Controllers
             ViewBag.Position = position;
             return View();
         }
+
         public ActionResult AnswerQuestions(string JobId,string JobApplicationId)
         {
             ViewBag.JobId = JobId;
